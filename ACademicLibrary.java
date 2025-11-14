@@ -56,6 +56,8 @@ public class ACademicLibrary implements ILibrary {
         return null;
     }
 
+    // procurar livro por ISBN
+
     public Book findBook(String title) {
         for (Publication pub : publications) {
             if (pub instanceof Book && pub.getTitle().equalsIgnoreCase(title)) {
@@ -64,6 +66,8 @@ public class ACademicLibrary implements ILibrary {
         }
         return null;
     }
+
+    // procurar livro por ISBN
 
     public Book findBook(long isbn) {
         for (Publication pub : publications) {

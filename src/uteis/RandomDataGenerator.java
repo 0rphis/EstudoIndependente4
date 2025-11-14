@@ -9,6 +9,7 @@ public class RandomDataGenerator {
     private static final Random random = new Random();
 
     // --- Listas fixas para sorteio ---
+
     private static final List<String> nomes = Arrays.asList(
             "Mateus Daniel", "Ana Souza", "Carlos Pereira", "Beatriz Lima",
             "Felipe Oliveira", "João Mendes", "Mariana Costa", "Rafael Rocha",
@@ -18,6 +19,8 @@ public class RandomDataGenerator {
             "Gabriela Duarte", "Ricardo Teixeira", "Julia Castro", "Paulo Ramos",
             "Amanda Lopes", "Luiza Correia", "Hugo Pinto", "Tatiane Dias",
             "Rodrigo Moura", "Natália Azevedo");
+
+    // lista de sorteio para ver qual titulo o livro vai ter
 
     private static final List<String> titulos = Arrays.asList(
             "Introdução à Computação",
@@ -51,6 +54,7 @@ public class RandomDataGenerator {
             "Automação de Processos com Python",
             "Desenvolvimento de Jogos Digitais");
 
+    // lista de sorteio para ver qual idioma o livro vai ter
     private static final List<String> idiomas = Arrays.asList("Português", "Inglês", "Espanhol", "Francês");
     private static final List<String> paises = Arrays.asList("Brasil", "EUA", "Canadá", "Alemanha", "Japão");
 
@@ -63,6 +67,8 @@ public class RandomDataGenerator {
         return new Author(afiliacao, correspondente, nome, email);
     }
 
+    // gerar um usuario aleatorio
+
     public static User randomUser() {
         String nome = randomFrom(nomes);
         String email = nome.toLowerCase().replace(" ", ".") + "@example.com";
@@ -71,6 +77,8 @@ public class RandomDataGenerator {
         int senha = 1000 + random.nextInt(9000);
         return new User(telefone, login, senha, nome, email);
     }
+
+    // gerar um livro aleatorio
 
     public static Book randomBook() {
         return new Book(
@@ -83,11 +91,14 @@ public class RandomDataGenerator {
                 random.nextLong(1000));
     }
 
+    // gerar um artigo aleatorio
+
     public static Article randomArticle() {
         ArrayList<String> palavras = new ArrayList<>();
         palavras.add(randomFrom(Arrays.asList("Java", "OOP", "IA", "Redes", "Dados", "Computação")));
         palavras.add(randomFrom(Arrays.asList("Algoritmos", "Programação", "Machine Learning", "Software")));
 
+        // garantir que as palavras-chave sejam únicas
         return new Article(
                 palavras,
                 10000000L + random.nextInt(9999999),
@@ -100,11 +111,15 @@ public class RandomDataGenerator {
                 random.nextLong(10000));
     }
 
+    // gerar uma editora aleatoria
+
     public static Publisher randomPublisher() {
         return new Publisher(
                 "Editora " + randomFrom(Arrays.asList("Atlas", "Moderna", "Científica", "Lumen", "Pearson")),
                 randomFrom(paises));
     }
+
+    // gerar uma revista aleatoria
 
     public static Journal randomJournal() {
         return new Journal("Revista " + randomFrom(Arrays.asList("Computação", "Tecnologia", "Engenharia", "Ciência")),
