@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomDataGenerator {
-    private static final Random random = new Random();
 
     // --- Listas fixas para sorteio ---
 
@@ -63,7 +63,7 @@ public class RandomDataGenerator {
         String nome = randomFrom(nomes);
         String email = nome.toLowerCase().replace(" ", ".") + "@example.com";
         String afiliacao = "Universidade " + randomFrom(Arrays.asList("Federal", "Estadual", "Privada"));
-        boolean correspondente = random.nextBoolean();
+        boolean correspondente = ThreadLocalRandom.current().nextBoolean();
         return new Author(afiliacao, correspondente, nome, email);
     }
 
@@ -72,9 +72,10 @@ public class RandomDataGenerator {
     public static User randomUser() {
         String nome = randomFrom(nomes);
         String email = nome.toLowerCase().replace(" ", ".") + "@example.com";
-        String telefone = "+55 11 9" + (1000 + random.nextInt(9000)) + "-" + (1000 + random.nextInt(9000));
+        String telefone = "+55 11 9" + (1000 + ThreadLocalRandom.current().nextInt(9000)) + "-"
+                + (1000 + ThreadLocalRandom.current().nextInt(9000));
         String login = nome.split(" ")[0].toLowerCase();
-        int senha = 1000 + random.nextInt(9000);
+        int senha = 1000 + ThreadLocalRandom.current().nextInt(9000);
         return new User(telefone, login, senha, nome, email);
     }
 
@@ -83,12 +84,12 @@ public class RandomDataGenerator {
     public static Book randomBook() {
         return new Book(
                 randomFrom(idiomas),
-                9780000000000L + random.nextInt(9999999),
-                (short) (100 + random.nextInt(400)),
+                9780000000000L + ThreadLocalRandom.current().nextInt(9999999),
+                (short) (100 + ThreadLocalRandom.current().nextInt(400)),
                 randomFrom(titulos),
-                (short) (2010 + random.nextInt(16)),
-                (byte) (1 + random.nextInt(5)),
-                random.nextLong(1000));
+                (short) (2010 + ThreadLocalRandom.current().nextInt(16)),
+                (byte) (1 + ThreadLocalRandom.current().nextInt(5)),
+                ThreadLocalRandom.current().nextLong(1000));
     }
 
     // gerar um artigo aleatorio
@@ -101,14 +102,14 @@ public class RandomDataGenerator {
         // garantir que as palavras-chave sejam únicas
         return new Article(
                 palavras,
-                10000000L + random.nextInt(9999999),
-                (byte) (1 + random.nextInt(10)),
-                (short) (1 + random.nextInt(100)),
-                (short) (100 + random.nextInt(300)),
+                10000000L + ThreadLocalRandom.current().nextInt(9999999),
+                (byte) (1 + ThreadLocalRandom.current().nextInt(10)),
+                (short) (1 + ThreadLocalRandom.current().nextInt(100)),
+                (short) (100 + ThreadLocalRandom.current().nextInt(300)),
                 randomFrom(titulos),
-                (short) (2010 + random.nextInt(16)),
-                (byte) (1 + random.nextInt(10)),
-                random.nextLong(10000));
+                (short) (2010 + ThreadLocalRandom.current().nextInt(16)),
+                (byte) (1 + ThreadLocalRandom.current().nextInt(10)),
+                ThreadLocalRandom.current().nextLong(10000));
     }
 
     // gerar uma editora aleatoria
@@ -123,11 +124,11 @@ public class RandomDataGenerator {
 
     public static Journal randomJournal() {
         return new Journal("Revista " + randomFrom(Arrays.asList("Computação", "Tecnologia", "Engenharia", "Ciência")),
-                (byte) (1 + random.nextInt(10)));
+                (byte) (1 + ThreadLocalRandom.current().nextInt(10)));
     }
 
     // --- Utilitário interno ---
     private static <T> T randomFrom(List<T> list) {
-        return list.get(random.nextInt(list.size()));
+        return list.get(ThreadLocalRandom.current().nextInt(list.size()));
     }
 }
