@@ -30,7 +30,6 @@ public class ACademicLibrary implements ILibrary {
         return (short) publications.size();
     }
 
-    // ✅ Esse método era o que estava faltando
     @Override
     public Publication findPublication(String title) {
         for (Publication pub : publications) {

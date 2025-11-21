@@ -73,6 +73,7 @@ public class Article extends Publication {
     }
 
     // um metodo para adicionar e remover palavras-chave da lista de palavras-chave
+
     // Métodos do diagrama UML
     public void addKeyWord(String key) {
         if (key != null && !key.trim().isEmpty()) {

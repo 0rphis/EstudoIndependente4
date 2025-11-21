@@ -3,74 +3,30 @@ package uteis;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomDataGenerator {
-
-    // --- Listas fixas para sorteio ---
-
-    private static final List<String> nomes = Arrays.asList(
-            "Mateus Daniel", "Ana Souza", "Carlos Pereira", "Beatriz Lima",
-            "Felipe Oliveira", "João Mendes", "Mariana Costa", "Rafael Rocha",
-            "Laura Martins", "Thiago Nunes", "Camila Ribeiro", "Lucas Alves",
-            "Bruna Ferreira", "Pedro Santos", "Isabela Torres", "André Carvalho",
-            "Sofia Lima", "Vinícius Silva", "Clara Barbosa", "Eduardo Gomes",
-            "Gabriela Duarte", "Ricardo Teixeira", "Julia Castro", "Paulo Ramos",
-            "Amanda Lopes", "Luiza Correia", "Hugo Pinto", "Tatiane Dias",
-            "Rodrigo Moura", "Natália Azevedo");
-
-    // lista de sorteio para ver qual titulo o livro vai ter
-
-    private static final List<String> titulos = Arrays.asList(
-            "Introdução à Computação",
-            "Estruturas de Dados Avançadas",
-            "Inteligência Artificial Aplicada",
-            "Aprendizado de Máquina em Java",
-            "Programação Funcional Moderna",
-            "Algoritmos Genéticos e Evolutivos",
-            "Computação Gráfica para Iniciantes",
-            "Sistemas Distribuídos e Cloud",
-            "Banco de Dados Relacional e NoSQL",
-            "Engenharia de Software Moderna",
-            "Computação Quântica Descomplicada",
-            "Redes Neurais Profundas",
-            "Visão Computacional com OpenCV",
-            "Desenvolvimento Web com Spring",
-            "Microserviços em Arquiteturas Escaláveis",
-            "Segurança da Informação e Criptografia",
-            "Big Data e Análise de Dados",
-            "Compiladores e Linguagens Formais",
-            "Programação Paralela e Concorrente",
-            "Computação de Alto Desempenho",
-            "Gestão de Projetos de Software",
-            "Teste de Software e Qualidade",
-            "Interação Humano-Computador",
-            "Computação Móvel e IoT",
-            "Robótica Educacional",
-            "Arquitetura de Computadores",
-            "Introdução à Lógica e Programação",
-            "Ciência de Dados Aplicada",
-            "Automação de Processos com Python",
-            "Desenvolvimento de Jogos Digitais");
+public class RandomDataGenerator extends UtilsDados {
 
     // lista de sorteio para ver qual idioma o livro vai ter
+
     private static final List<String> idiomas = Arrays.asList("Português", "Inglês", "Espanhol", "Francês");
     private static final List<String> paises = Arrays.asList("Brasil", "EUA", "Canadá", "Alemanha", "Japão");
 
-    // --- Métodos de geração de dados ---
+    // gerar um autor aleatorio
+
     public static Author randomAuthor() {
-        String nome = randomFrom(nomes);
+        String nome = UtilsDados.gerarNomeAleatorio();
         String email = nome.toLowerCase().replace(" ", ".") + "@example.com";
         String afiliacao = "Universidade " + randomFrom(Arrays.asList("Federal", "Estadual", "Privada"));
         boolean correspondente = ThreadLocalRandom.current().nextBoolean();
         return new Author(afiliacao, correspondente, nome, email);
     }
+    // #endregion
 
-    // gerar um usuario aleatorio
+    // #region gerar um usuario aleatorio
 
     public static User randomUser() {
-        String nome = randomFrom(nomes);
+        String nome = UtilsDados.gerarNomeAleatorio();
         String email = nome.toLowerCase().replace(" ", ".") + "@example.com";
         String telefone = "+55 11 9" + (1000 + ThreadLocalRandom.current().nextInt(9000)) + "-"
                 + (1000 + ThreadLocalRandom.current().nextInt(9000));
@@ -78,21 +34,23 @@ public class RandomDataGenerator {
         int senha = 1000 + ThreadLocalRandom.current().nextInt(9000);
         return new User(telefone, login, senha, nome, email);
     }
+    // #endregion
 
-    // gerar um livro aleatorio
+    // #region gerar um livro aleatorio
 
     public static Book randomBook() {
         return new Book(
                 randomFrom(idiomas),
                 9780000000000L + ThreadLocalRandom.current().nextInt(9999999),
                 (short) (100 + ThreadLocalRandom.current().nextInt(400)),
-                randomFrom(titulos),
+                randomFrom(UtilsDados.getTitulos()),
                 (short) (2010 + ThreadLocalRandom.current().nextInt(16)),
                 (byte) (1 + ThreadLocalRandom.current().nextInt(5)),
                 ThreadLocalRandom.current().nextLong(1000));
     }
+    // #endregion
 
-    // gerar um artigo aleatorio
+    // #region gerar um artigo aleatorio
 
     public static Article randomArticle() {
         ArrayList<String> palavras = new ArrayList<>();
@@ -106,11 +64,12 @@ public class RandomDataGenerator {
                 (byte) (1 + ThreadLocalRandom.current().nextInt(10)),
                 (short) (1 + ThreadLocalRandom.current().nextInt(100)),
                 (short) (100 + ThreadLocalRandom.current().nextInt(300)),
-                randomFrom(titulos),
+                randomFrom(UtilsDados.getTitulos()),
                 (short) (2010 + ThreadLocalRandom.current().nextInt(16)),
                 (byte) (1 + ThreadLocalRandom.current().nextInt(10)),
                 ThreadLocalRandom.current().nextLong(10000));
     }
+    // #endregion
 
     // gerar uma editora aleatoria
 

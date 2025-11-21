@@ -12,7 +12,7 @@ public class User extends Person {
         this.password = password;
     }
 
-    public void User(String phone, String login, int password, String name, String email) {
+    public void User() {
     }
 
     public String getPhone() {
